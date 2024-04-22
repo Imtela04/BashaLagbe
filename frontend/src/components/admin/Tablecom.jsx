@@ -33,21 +33,21 @@ const Tablecom = ({ apiUrl }) => {
       // Update the status to "Completed" locally
       item.paymentResult.status = "completed";
 
-      // Send a POST request to the API using Axios
-      axios
-        .post(`http://127.0.0.1:3001/api/payment/check/${obj_id}`, {
-          status: "confirm",
-        })
-        .then((response) => {
-          console.log("Success:", response.data);
-          // Reload the page after the request is successful
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      // // Send a POST request to the API using Axios
+      // axios
+      //   .post(`http://127.0.0.1:3001/api/payment/check/${obj_id}`, {
+      //     status: "confirm",
+      //   })
+      //   .then((response) => {
+      //     console.log("Success:", response.data);
+      //     // Reload the page after the request is successful
+      //     window.location.reload();
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //   });
     } else {
-      // If the status is not "Pending", you might want to handle this case differently
+      // If the status is not "Pending", the case should be handle this case differently
       console.log("Status is not pending, cannot confirm");
     }
   }
