@@ -27,7 +27,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex flex-row gap-2 items-center">
             <div className="flex-shrink-0">
-              <img className="h-24 w-auto" src={Img} alt="Your Company" />
+              <img className="h-24 w-auto" src={Img} alt="Company" />
             </div>
             {/* Links */}
             <Link

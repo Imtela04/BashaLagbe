@@ -51,7 +51,7 @@ const RegForm = () => {
           className="mx-auto h-26 w-auto"
           style={{ height: "250px" }}
           src={logo}
-          alt="Your Company"
+          alt="Company"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Signup in to your account

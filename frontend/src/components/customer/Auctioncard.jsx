@@ -51,9 +51,7 @@ const Auctioncard = ({
     //   alert('Please enter a bid amount.');
     //   return;
     // }
-    // if (tranxd.trim() === '') {
-    //   alert('Please enter a transaction id');
-    //   return;
+    
     // }
 
     try {
@@ -90,7 +88,7 @@ const Auctioncard = ({
     <>
       <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-gray-700 ">
         <div className="relative">
-          <img className="rounded-t-lg" src={imagelink} alt="car" />
+          <img className="rounded-t-lg" src={imagelink} alt="home" />
           <div className="absolute top-0 right-0 bg-black bg-opacity-50 text-white p-2"></div>
         </div>
 

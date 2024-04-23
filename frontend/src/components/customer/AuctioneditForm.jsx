@@ -115,13 +115,13 @@ const AuctioneditForm = ({ id, homename, size, infodetails, imagelink }) => {
           <div className="w-full px-3">
             <label
               className="block uppercase tracking-wide text-white font-bold mb-2"
-              htmlFor="carDetails"
+              htmlFor="homeDetails"
             >
               Home Details
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="carDetails"
+              id="homeDetails"
               type="text"
               placeholder="Details of the Home"
               value={details}

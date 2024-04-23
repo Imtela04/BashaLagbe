@@ -145,13 +145,13 @@ const Auctoinform = () => {
           <div className="w-full px-3">
             <label
               className="block uppercase tracking-wide text-white font-bold mb-2"
-              htmlFor="carDetails"
+              htmlFor="homeDetails"
             >
               Home Details
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="carDetails"
+              id="homeDetails"
               type="text"
               placeholder="Details of the Home"
               value={details}
@@ -184,19 +184,19 @@ const Auctoinform = () => {
           <div className="w-full px-3 mt-2">
             <label
               className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-              htmlFor="car-image"
+              htmlFor="home-image"
             >
               Add Image
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="car-image"
+              id="home-image"
               type="text"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
             <p className="text-gray-600 text-xs italic mt-2">
-              Upload an image for the car
+              Upload an image for the rent
             </p>
           </div>
         </div>

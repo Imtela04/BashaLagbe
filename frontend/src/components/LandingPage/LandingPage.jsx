@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-//import Video from "../assets/yolov8n.mp4";
 import Image from "../assets/black_bg.png";
 
 const Landingpage = () => {
