@@ -7,6 +7,7 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import CustomerDashboard from "./components/customer/CustomerDashboard";
 import ChangePass from "./components/auth/ChangePass";
 import Landingpage from "./components/LandingPage/LandingPage";
+import About from './components/About';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/signup" element={<RegForm />} />
         <Route path="/login" element={<LoginFrom />} />
         <Route path="/changepass" element={<ChangePass />} />
+        <Route path='/about' element={<About />} />
+        
       </Routes>
     </Router>
   );
