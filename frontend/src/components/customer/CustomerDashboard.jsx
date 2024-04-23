@@ -97,34 +97,8 @@ const CustomerDashboard = () => {
   // Handle search button click
   const handleSearch = () => {
     // Perform search logic with the searchTerm
-    if (searchTerm.trim() === "") {
-      // If the searchTerm is blank, refetch all the data
-      fetchAllData();
-      return;
-    }
-  
-    // Filter the data based on the homeName property
-    const filteredData = data.filter((item) =>
-      item.homeName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  
-    // Update the data state with the filteredData
-    setData(filteredData);
+    console.log(`Searching for: ${searchTerm}`);
   };
-  
-  // Function to fetch all data
-  const fetchAllData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3001/api/auctoin/getallauctoin"
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // Handle error appropriately
-    }
-  };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -180,7 +154,7 @@ const CustomerDashboard = () => {
       </div>
 
       <div className="flex flex-wrap mx-5 mt-10 gap-24 overflow-auto">
-        {data?.map(
+       {data?.map(
           (item, index) =>
             item.email !== userEmail && ( // Conditional rendering based on email match
               <Auctioncard

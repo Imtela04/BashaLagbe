@@ -5,6 +5,8 @@ import Tablecom from "./Tablecom";
 import Auctioncard from "../customer/Auctioncard";
 import axios from "axios";
 import Auctoinform from "../customer/Auctoinform";
+import {FaSearch} from 'react-icons/fa';  
+
 const AdminDashboard = () => {
   function checkUserLoggedIn() {
     const token = localStorage.getItem("token");
@@ -135,7 +137,7 @@ const AdminDashboard = () => {
               }
               alt="profile pic"
             />
-            <h1 className="font-bold text-2xl mt-4">Welcome {name}</h1>
+            <h1 className="font-bold text-2xl mt-4">Welcome, {name}!</h1>
             <div className="mt-2 h-0.5 w-[200px] bg-zinc-950"></div>
           </div>
 
@@ -143,12 +145,13 @@ const AdminDashboard = () => {
             <div className="flex fle-row gap-4 items-center">
               <h1 className="font-bold text-2xl ml-4">All Booking</h1>
               <input
-                className="border-2 border-gray-800 rounded-md px-2"
+                className="border-2 border-gray-800 p-3 rounded-md px-2 flex items-start focus: outline-none"
                 type="search"
                 placeholder="Search By Home Name"
                 value={searchQuery}
                 onChange={handleSearch}
               />
+              <FaSearch className = 'text-slate-600'/>
             </div>
             <div className="mt-2 h-0.5 w-full bg-zinc-950"></div>
             <div className="mt-10 mx-4">
@@ -178,12 +181,13 @@ const AdminDashboard = () => {
             <div className="flex fle-row gap-4 items-center">
               <h1 className="font-bold text-2xl ml-4">All Bookings</h1>
               <input
-                className="border-2 border-gray-800 rounded-md px-2"
+                className="border-2 border-gray-800 p-3 rounded-md px-2 flex items-start focus: outline-none"
                 type="search"
                 placeholder="Search By Home Name"
-                value={searchQuery2}
-                onChange={handleSearch2}
+                value={searchQuery}
+                onChange={handleSearch}
               />
+              <FaSearch className = 'text-slate-600'/>
             </div>
             <div className="mt-2 h-0.5 w-full bg-zinc-950"></div>
             <div className="mt-10 mx-4">
@@ -220,12 +224,13 @@ const AdminDashboard = () => {
             <div className="flex fle-row gap-4 items-center">
               <h1 className="font-bold text-2xl ml-4">All Payments</h1>
               <input
-                className="border-2 border-gray-800 rounded-md px-2"
+                className="border-2 border-gray-800 p-3 rounded-md px-2 flex items-start focus: outline-none"
                 type="search"
                 placeholder="Search By Home Name"
-                value={searchQuery3}
-                onChange={handleSearch3}
+                value={searchQuery}
+                onChange={handleSearch}
               />
+              <FaSearch className = 'text-slate-600'/>
             </div>
             <div className="mt-2 h-0.5 w-full bg-zinc-950"></div>
             <div className="mt-10 mx-4">
