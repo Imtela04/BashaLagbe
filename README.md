@@ -15,7 +15,7 @@
 
 ---
 
-## ✨ About BashaLagbe
+## ℹ️ About BashaLagbe
 
 Initially created to aid student accommodation, **BashaLagbe** is a comprehensive web-based house rental platform designed to eliminate the difficulty in finding your secure abode. The name "বাসা লাগবে" (Basha Lagbe) means "need a house" in Bengali, reflecting our mission to help people find their ideal rental homes with ease and confidence.
 
@@ -53,7 +53,7 @@ Initially created to aid student accommodation, **BashaLagbe** is a comprehensiv
 ### Prerequisites
 - Node.js (v14 or higher)
 - MongoDB
-- npm or yarn
+- npm
 
 ### 📥 Installation
 
@@ -180,12 +180,6 @@ We welcome contributions from the community! Here's how you can help make BashaL
 
 
 ---
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-<div align="center">
 
 ### 🙏 Acknowledgments
 
