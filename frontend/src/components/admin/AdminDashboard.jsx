@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Tablecom from "./Tablecom";
 import Auctioncard from "../customer/Auctioncard";
 import axios from "axios";
-import Auctoinform from "../customer/Auctoinform";
+import Auctionform from "../customer/Auctionform";
 import {FaSearch} from 'react-icons/fa';  
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const AdminDashboard = () => {
   function checkUserLoggedIn() {
@@ -45,9 +46,7 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3001/api/auctoin/getallauctoin"
-      );
+      const response = await axios.get(`${API_URL}/api/auction/getallauction`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -57,7 +56,7 @@ const AdminDashboard = () => {
 
   const fetchReport = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/report");
+      const response = await axios.get(`${API_URL}/api/report`);
       setReport(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -73,12 +72,11 @@ const AdminDashboard = () => {
     fetchReport();
   }, []);
 
-  console.log(data);
+ 
 
   function changeStatus(obj_id, email, trxnid) {
-    console.log(obj_id, email, trxnid);
     axios
-      .put(`http://localhost:3001/api/auctoin/bid/pay/${obj_id}`, {
+      .put(`${API_URL}/api/auction/bid/pay/${obj_id}`, {
         email,
         trxnid,
       })
@@ -175,7 +173,7 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="flex justify-center bg-gray-900 rounded-[50px] shadow-lg">
-            <Auctoinform />
+            <Auctionform />
           </div>
           <div className="my-10">
             <div className="flex fle-row gap-4 items-center">

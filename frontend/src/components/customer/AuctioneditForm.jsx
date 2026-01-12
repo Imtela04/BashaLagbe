@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 import { Link, useNavigate } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const AuctioneditForm = ({ id, homename, size, infodetails, imagelink }) => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const AuctioneditForm = ({ id, homename, size, infodetails, imagelink }) => {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/api/auctoin//editaction/${id}`,
+        `${API_URL}/api/auction/editaction/${id}`,
         {
           homeName,
           homeSize,

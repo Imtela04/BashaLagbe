@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import AuctioneditForm from "./AuctioneditForm";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const Auctioncard = ({
   imagelink,
@@ -58,7 +59,7 @@ const Auctioncard = ({
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/api/auctoin/bid/${id}`,
+        `${API_URL}/api/auction/bid/${id}`,
         {
           email: userEmail,
           //trxnid: tranxd,

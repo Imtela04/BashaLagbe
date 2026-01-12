@@ -4,10 +4,11 @@
   "description": "cse470 API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Nuzhat Tahsin Ahona",
+  "author": "Imtela Islam",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",

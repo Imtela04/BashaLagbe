@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-const Auctoinform = () => {
+const Auctionform = () => {
   const [homeName, sethomeName] = useState("");
   const [locationName, setlocationName] = useState("");
   const [homeSize, sethomeSize] = useState("");
@@ -40,7 +41,7 @@ const Auctoinform = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/api/auctoin/createauction",
+        `${API_URL}/api/auction/createauction`,
         {
           homeName,
           email,
@@ -214,4 +215,4 @@ const Auctoinform = () => {
   );
 };
 
-export default Auctoinform;
+export default Auctionform;

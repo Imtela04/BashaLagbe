@@ -52,7 +52,7 @@ const addAllCustomers = async (req, res) => {
 const loginCustomer = async (req, res) => {
   try {
     const customer = await Customer.findOne({ email: req.body.registerEmail });
-    console.log("customer:", req.body.registerEmail);
+    // console.log("customer:", req.body.registerEmail);
 
     if (
       customer &&

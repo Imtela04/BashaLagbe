@@ -16,7 +16,7 @@ router.post("/createauction", createAuction);
 router.post("/editaction/:id", updateAuction);
 
 // get all auctions
-router.get("/getallauctoin", getAllAuctions);
+router.get("/getallauction", getAllAuctions);
 
 // get a specific auction by ID
 router.get("/:email", getAuctionById);

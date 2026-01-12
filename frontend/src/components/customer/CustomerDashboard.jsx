@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Card } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import Auctioncard from "./Auctioncard";
-import Auctoinform from "./Auctoinform";
+import Auctionform from "./Auctionform";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 const CustomerDashboard = () => {
   function checkUserLoggedIn() {
     const token = localStorage.getItem("token");
@@ -23,16 +25,16 @@ const CustomerDashboard = () => {
     ? JSON.parse(localStorage.getItem("user")).email
     : "";
 
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [email, setEmail] = useState();
   const [refresh, setRefrsh] = useState();
-  const [userhomedata, setuserhomedata] = useState();
+  const [userhomedata, setuserhomedata] = useState([]);
   const [issue, setIssue] = useState("");
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/api/auctoin/getallauctoin"
+        `${API_URL}/api/auction/getallauction`
       );
       setData(response.data);
     } catch (error) {
@@ -43,7 +45,7 @@ const CustomerDashboard = () => {
   const fetchuserData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/auctoin/${userEmail}`
+        `${API_URL}/api/auction/${userEmail}`
       );
       setuserhomedata(response.data);
     } catch (error) {
@@ -94,36 +96,37 @@ const CustomerDashboard = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Function to fetch all data
+  const fetchAllData = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/auction/getallauction`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle error appropriately
+    }
+  };
+
   // Handle search button click
   const handleSearch = () => {
     // Perform search logic with the searchTerm
-     if (searchTerm.trim() === "") {
-    // If the searchTerm is blank, refetch all the data
-    fetchAllData();
-    return;
-  }
+    if (searchTerm.trim() === "") {
+      // If the searchTerm is blank, refetch all the data
+      fetchAllData();
+      return;
+    }
 
-  // Filter the data based on the homeName property
-  const filteredData = data.filter((item) =>
-    item.homeName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Update the data state with the filteredData
-  setData(filteredData);
-};
-
-// Function to fetch all data
-const fetchAllData = async () => {
-  try {
-    const response = await axios.get(
-      "http://localhost:3001/api/auctoin/getallauctoin"
+    // Filter the data based on the homeName property
+    const filteredData = data?.filter((item) =>
+      item.homeName.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setData(response.data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Handle error appropriately
-  }
-};
+
+    // Update the data state with the filteredData
+    if (filteredData) {
+      setData(filteredData);
+    }
     console.log(`Searching for: ${searchTerm}`);
   };
 
@@ -294,6 +297,6 @@ const fetchAllData = async () => {
       )}
     </>
   );
-
+};
 
 export default CustomerDashboard;

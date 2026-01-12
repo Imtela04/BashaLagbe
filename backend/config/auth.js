@@ -1,9 +1,14 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");   ///token for secure communication
+const jwt = require("jsonwebtoken");
 
-const signInToken = (user) => {   //takes user object as argument and sign method e jay and payload niye user object pass hoy function e
+/**
+ * Generates a JWT token for authenticated user
+ * @param {Object} user - User object containing user details
+ * @returns {String} JWT token
+ */
+const signInToken = (user) => {
   return jwt.sign(
-    {                                                           ///authentication purpose e used 
+    {
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -12,43 +17,41 @@ const signInToken = (user) => {   //takes user object as argument and sign metho
       image: user.image,
       isAdmin: user.isAdmin,
     },
-    process.env.JWT_SECRET,   /// holds secret key  jeta used for signing 
+    process.env.JWT_SECRET,
     {
-      expiresIn: "2d", //2 days expiry of token
+      expiresIn: "2d",
     }
   );
 };
 
-// const tokenForVerify = (user) => {
-//   return jwt.sign(
-//     {                                        //verifying if it's already in the database
-//       _id: user._id,
-//       name: user.name,
-//       email: user.email,
-//       password: user.password,
-//     },
-//     process.env.JWT_SECRET_FOR_VERIFY,
-//     { expiresIn: "15m" }   // 15 mins e expired
-//   );
-// };
-
+/**
+ * Middleware to verify JWT token from request headers
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 const isAuth = async (req, res, next) => {
   const { authorization } = req.headers;
-  // console.log('authorization',authorization)
+  
+  if (!authorization) {
+    return res.status(401).send({
+      message: "Authorization header is required",
+    });
+  }
+
   try {
     const token = authorization.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);     //gibb theke readable
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (err) {
     res.status(401).send({
-      message: err.message,
+      message: "Invalid or expired token",
     });
   }
 };
 
 module.exports = {
   signInToken,
-  // tokenForVerify,
   isAuth,
 };
