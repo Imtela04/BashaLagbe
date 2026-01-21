@@ -1,0 +1,106 @@
+STUDENT ACCOMMODATION SYSTEM 
+Requirements:
+
+Module 1
+Landlord Profile System ✅
+Landlord Info page (public)
+Detailed Info (private) ✅
+Landlord rating from tenant
+Building Rating
+Roommate Profile System
+Landing Info (public)
+Detailed Info (private)
+Rating from other roommates
+Constraint
+Profile Update
+Add any new information
+Update landlord’s name
+Update contact number
+Update email address
+Create Accommodation Post
+Show button to create post
+Clicking button leads to form 
+Filling up prompts in the form 
+Clicking confirm button automatically posts
+Update Accomodation Details
+Show update button
+Clicking button leads to accommodation form
+Any prompt of the form can be changed
+Clicking confirm button automatically updates the post
+
+Module 2
+ Accommodations List
+Shows button for accommodation list under the profile
+Clicking button leads to list of accommodations depending on profile type
+If it is landlord then accommodation list shows number of properties registered and rented out
+If it is tenant then list provides number of rented accommodation taken so far by the user
+Clicking on an accommodation leads to details about the accommodation
+ Roommate Request System
+send and receive roommate requests 
+Messaging system
+Search location
+Filter
+Show a dropdown box
+Toggle the box to show detailed information
+Choose specific features to filter by such as rent and location
+Clicking feature shortlist according to features chosen
+ Hotline
+Show a call icon 
+Highlight icon when hovered over
+Clicking of icon leads to list of hotline numbers
+Clicking on a number automatically calls the hotline
+
+Module 3
+ Report
+Show a button to report
+Clicking button leads to a form
+Form shows multiple reasons for reporting
+Multiple submission automatically leads to post being removed temporarily
+ Feedback
+Show a button for feedback
+Clicking button leads to a form
+Form provides multiple options as well as a blank textbox to write feedback
+Feedback is automatically posted to feedback channel
+ Chat system
+Show chatbox
+Chatbox will pop-up when clicked
+List of pre-prompted questions will be displayed
+System will automatically answer questions based on chosen prompt
+ Payment plan
+Show payment window when confirming a property chosen
+Show multiple payment options
+If online payment is chosen, lead to payment gateway
+Payment gateway connects with SSLCOMMERZ
+ Rating
+Show a button for rating
+Clicking button shows a 5-star icon
+Clicking on the number of stars rates the property
+Rating is automatically updated and mean of rating is shown under property
+
+Module 4
+ Password change
+Button to change password is shown under profile
+Clicking button leads to providing the password for the profile as verification
+If password matches, new window where password can be changes is opened
+A new password has to be provided twice to confirm and change the password
+ Language(if we can)
+Show a language button
+Toggling button shows drop down box
+Clicking on language in the drop down box automatically translates page
+Page is shown in the language chosen only
+ Surveyed rating
+Posting a property automatically leads to rating forms
+Multiple rating form provide prompts to answer for multiple fields such as transport facilities near location and quality of property
+Answers can be provided within a range of 5
+Answering all prompts automatically provides a rating for the property from the system
+ Password reset functionality using email
+Show forgot password button
+Clicking button leads to a text box prompting for email
+When email is provided, it is matched with the email addresses in the database
+If a match is found, an email is sent with automatically generated link for password change
+Clicking on link leads to password change feature (requirement 16)
+ Notification system
+Show bell icon on top
+Number of requests made or questions asked is shown on the bell
+Clicking the icon leads to drop down box of the list of notifications
+Clicking on a notification leads to the page

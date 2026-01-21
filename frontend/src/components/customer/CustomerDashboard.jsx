@@ -196,6 +196,7 @@ const CustomerDashboard = () => {
                 startbid={item.startingPrice}
                 id={item._id}
                 edit={false}
+                landlordEmail={item.email}
                 // timer={/* logic to calculate remaining time based on item.auctionEndTime */}
               />
             )
@@ -222,6 +223,9 @@ const CustomerDashboard = () => {
                 Offer Placed
               </th>
               <th className="w-14 h-8 px-5 py-1.5 bg-white rounded shadow">
+                Status
+              </th>
+              <th className="w-14 h-8 px-5 py-1.5 bg-white rounded shadow">
                 Payment
               </th>
             </tr>
@@ -237,11 +241,22 @@ const CustomerDashboard = () => {
                       <td className="pt-2">{item1.homeName}</td>
 
                       <td className="pt-2">
-                        <b>{item2.bidAmount}</b>
+                        <b>৳{item2.bidAmount}</b>
+                      </td>
+                      <td className="pt-2">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          item2.status === 'accepted' ? 'bg-green-100 text-green-800' :
+                          item2.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {(item2.status || 'pending').toUpperCase()}
+                        </span>
                       </td>
                       <td className="pt-2 flex justify-center">
-                        <button className="rounded shadow-sm bg-green-300 text-black">
-                          {item2.payment ? "Booked" : "Pending"}
+                        <button className={`rounded shadow-sm px-3 py-1 ${
+                          item2.payment ? 'bg-green-300' : 'bg-gray-300'
+                        } text-black`}>
+                          {item2.payment ? "Paid" : "Unpaid"}
                         </button>
                       </td>
                     </tr>

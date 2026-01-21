@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/basha lagbe.png";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 const LoginFrom = () => {
   const [registerEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,7 @@ const LoginFrom = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/api/customer/login",
+        `${API_URL}/api/customer/login`,
         {
           registerEmail,
           password,
@@ -38,11 +40,12 @@ const LoginFrom = () => {
       setIsLogin(true);
       navigate("/");
     } catch (err) {
-      setError(err.response.data.message);
+      const errorMessage = err.response?.data?.message || err.message || "Login failed. Please try again.";
+      setError(errorMessage);
+      console.error("Login error:", err);
       setTimeout(() => {
         setError("");
       }, 5000);
-      navigate("/login");
     }
   };
 

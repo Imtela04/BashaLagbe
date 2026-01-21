@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuctioneditForm from "./AuctioneditForm";
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
@@ -14,7 +15,10 @@ const Auctioncard = ({
   timer,
   id,
   edit,
+  landlordEmail,
 }) => {
+  const navigate = useNavigate();
+  const [landlordInfo, setLandlordInfo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [iseditModalOpen, setIsEditModalOpen] = useState(false);
   const [bidPrice, setBidPrice] = useState("");
@@ -29,7 +33,27 @@ const Auctioncard = ({
   const userName = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).name
     : "";
+  
   console.log(userEmail);
+  console.log("Landlord Email:", landlordEmail);
+
+  useEffect(() => {
+    if (landlordEmail) {
+      console.log("Fetching landlord info for:", landlordEmail);
+      fetchLandlordInfo();
+    }
+  }, [landlordEmail]);
+
+  const fetchLandlordInfo = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/customer/email/${landlordEmail}`);
+      console.log("Landlord info fetched:", response.data);
+      setLandlordInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching landlord info:", error);
+    }
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -99,6 +123,18 @@ const Auctioncard = ({
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {homename}
           </h5>
+
+          {landlordInfo && landlordInfo.userType === 'landlord' && (
+            <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+              Posted by:{" "}
+              <button
+                onClick={() => navigate(`/profile/landlord/${landlordInfo._id}`)}
+                className="text-blue-600 hover:text-blue-800 hover:underline font-semibold"
+              >
+                {landlordInfo.name}
+              </button>
+            </p>
+          )}
 
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {details}

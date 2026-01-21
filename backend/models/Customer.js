@@ -22,7 +22,6 @@ const customerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-
     email: {
       type: String,
       required: true,
@@ -42,6 +41,56 @@ const customerSchema = new mongoose.Schema(
       required: false,
       default: false,
     },
+    // Module 1: User Type System
+    userType: {
+      type: String,
+      enum: ['landlord', 'tenant', 'roommate'],
+      default: 'tenant',
+    },
+    // Module 1: Profile Information
+    bio: {
+      type: String,
+      required: false,
+    },
+    profileVisibility: {
+      type: String,
+      enum: ['public', 'private'],
+      default: 'public',
+    },
+    // Module 1: Rating System
+    landlordRating: {
+      totalRatings: { type: Number, default: 0 },
+      averageRating: { type: Number, default: 0 },
+      ratings: [{
+        ratedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
+        rating: { type: Number, min: 1, max: 5 },
+        comment: String,
+        createdAt: { type: Date, default: Date.now }
+      }]
+    },
+    roommateRating: {
+      totalRatings: { type: Number, default: 0 },
+      averageRating: { type: Number, default: 0 },
+      ratings: [{
+        ratedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
+        rating: { type: Number, min: 1, max: 5 },
+        comment: String,
+        createdAt: { type: Date, default: Date.now }
+      }]
+    },
+    // Module 1: Building Ratings for Landlords
+    buildingRatings: [{
+      buildingName: String,
+      rating: { type: Number, min: 1, max: 5 },
+      ratedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
+      comment: String,
+      createdAt: { type: Date, default: Date.now }
+    }],
+    // Module 1: Properties owned (for landlords)
+    propertiesOwned: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Auction'
+    }],
   },
   {
     timestamps: true,

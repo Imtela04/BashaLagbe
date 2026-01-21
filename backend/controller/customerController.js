@@ -5,7 +5,7 @@ const Customer = require("../models/Customer");
 const { signInToken, tokenForVerify } = require("../config/auth");
 
 const registerCustomer = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, userType } = req.body;
   const isAdded = await Customer.findOne({ email: email });
 
   if (isAdded) {
@@ -15,6 +15,7 @@ const registerCustomer = async (req, res) => {
       _id: isAdded._id,
       name: isAdded.name,
       email: isAdded.email,
+      userType: isAdded.userType,
       message: "Email Already Verified!",
     });
   } else {
@@ -22,14 +23,16 @@ const registerCustomer = async (req, res) => {
       name,
       email,
       password: bcrypt.hashSync(password),
+      userType: userType || 'tenant', // Default to tenant if not specified
     });
-    newUser.save();
+    await newUser.save();
     const token = signInToken(newUser);
     res.send({
       token,
       _id: newUser._id,
       name: newUser.name,
       email: newUser.email,
+      userType: newUser.userType,
       message: "Email Verified, Please Login Now!",
     });
   }
@@ -69,6 +72,9 @@ const loginCustomer = async (req, res) => {
         phone: customer.phone,
         image: customer.image,
         isAdmin: customer.isAdmin,
+        userType: customer.userType,
+        bio: customer.bio,
+        profileVisibility: customer.profileVisibility,
       });
     } else {
       res.status(401).send({
@@ -135,11 +141,15 @@ const updateCustomer = async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id);
     if (customer) {
-      customer.name = req.body.name;
-      customer.email = req.body.email;
-      customer.address = req.body.address;
-      customer.phone = req.body.phone;
-      customer.image = req.body.image;
+      customer.name = req.body.name || customer.name;
+      customer.email = req.body.email || customer.email;
+      customer.address = req.body.address || customer.address;
+      customer.phone = req.body.phone || customer.phone;
+      customer.image = req.body.image || customer.image;
+      customer.bio = req.body.bio || customer.bio;
+      customer.profileVisibility = req.body.profileVisibility || customer.profileVisibility;
+      customer.userType = req.body.userType || customer.userType;
+      
       const updatedUser = await customer.save();
       const token = signInToken(updatedUser);
       res.send({
@@ -150,6 +160,9 @@ const updateCustomer = async (req, res) => {
         address: updatedUser.address,
         phone: updatedUser.phone,
         image: updatedUser.image,
+        userType: updatedUser.userType,
+        bio: updatedUser.bio,
+        profileVisibility: updatedUser.profileVisibility,
       });
     }
   } catch (err) {
@@ -173,6 +186,23 @@ const deleteCustomer = (req, res) => {
   });
 };
 
+const getCustomerByEmail = async (req, res) => {
+  try {
+    const customer = await Customer.findOne({ email: req.params.email }).select('-password');
+    if (customer) {
+      res.send(customer);
+    } else {
+      res.status(404).send({
+        message: "Customer not found!",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   loginCustomer,
   registerCustomer,
@@ -182,4 +212,5 @@ module.exports = {
   getCustomerById,
   updateCustomer,
   deleteCustomer,
+  getCustomerByEmail,
 };

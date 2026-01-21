@@ -22,6 +22,11 @@ const bidderSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  status: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected'],
+    default: 'pending',
+  },
 });
 
 const auctionSchema = new mongoose.Schema(

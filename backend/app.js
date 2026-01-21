@@ -7,6 +7,7 @@ const rateLimit = require("express-rate-limit");
 
 const customerRoutes = require("./routes/customerRoutes");
 const auctionRoutes = require("./routes/auctionRoutes");
+const ratingRoutes = require("./routes/ratingRoutes");
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 // API routes
 app.use("/api/customer", customerRoutes);
 app.use("/api/auction", auctionRoutes); // Fixed typo
+app.use("/api/rating", ratingRoutes); // Module 1: Rating system
 
 // 404 handler
 app.use((req, res) => {

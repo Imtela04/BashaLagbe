@@ -9,6 +9,7 @@ const {
   updateCustomer,
   deleteCustomer,
   addAllCustomers,
+  getCustomerByEmail,
 } = require("../controller/customerController");
 
 //register a user
@@ -28,6 +29,9 @@ router.get("/", getAllCustomers);
 
 //get a user
 router.get("/:id", getCustomerById);
+
+//get a user by email
+router.get("/email/:email", getCustomerByEmail);
 
 //update a user
 router.put("/:id", updateCustomer);

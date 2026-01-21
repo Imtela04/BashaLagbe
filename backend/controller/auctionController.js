@@ -159,6 +159,39 @@ const bidpayId = async (req, res) => {
   }
 };
 
+const updateBidStatus = async (req, res) => {
+  const auctionId = req.params.auctionId;
+  const bidderId = req.params.bidderId;
+  const { status } = req.body; // 'accepted' or 'rejected'
+
+  try {
+    const auction = await Auction.findById(auctionId);
+
+    if (!auction) {
+      return res.status(404).send({ message: "Auction not found" });
+    }
+
+    // Find the bidder by _id in the bidders array
+    const bidderIndex = auction.bidders.findIndex(
+      bidder => bidder._id.toString() === bidderId
+    );
+    
+    if (bidderIndex === -1) {
+      return res.status(404).send({ message: "Bidder not found" });
+    }
+
+    auction.bidders[bidderIndex].status = status;
+    const updatedAuction = await auction.save();
+
+    res.status(200).json({
+      message: `Bid ${status} successfully`,
+      auction: updatedAuction,
+    });
+  } catch (error) {
+    res.status(500).send({ message: "Server Error: " + error.message });
+  }
+};
+
 module.exports = {
   createAuction,
   getAllAuctions,
@@ -167,4 +200,5 @@ module.exports = {
   deleteAuction,
   bidAuctionbyId,
   bidpayId,
+  updateBidStatus,
 };

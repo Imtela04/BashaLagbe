@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/basha lagbe.png";
-
 import axios from "axios";
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const RegForm = () => {
   const [name, setFirstname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("tenant");
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(false);
 
@@ -25,11 +27,12 @@ const RegForm = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/api/customer/register",
+        `${API_URL}/api/customer/register`,
         {
           name,
           email,
           password,
+          userType,
         }
       );
       localStorage.setItem("token", data.token);
@@ -38,7 +41,9 @@ const RegForm = () => {
       localStorage.clear();
       navigate("/login");
     } catch (err) {
-      setError(err.response.data.message);
+      const errorMessage = err.response?.data?.message || err.message || "Registration failed. Please try again.";
+      setError(errorMessage);
+      console.error("Registration error:", err);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -77,6 +82,28 @@ const RegForm = () => {
                 onChange={(e) => setFirstname(e.target.value)}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="userType"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              I am a
+            </label>
+            <div className="mt-2">
+              <select
+                id="userType"
+                name="userType"
+                value={userType}
+                onChange={(e) => setUserType(e.target.value)}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                <option value="tenant">Tenant (Looking for accommodation)</option>
+                <option value="landlord">Landlord (Property owner)</option>
+                <option value="roommate">Roommate (Looking for roommates)</option>
+              </select>
             </div>
           </div>
           <div>
